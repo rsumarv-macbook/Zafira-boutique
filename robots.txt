@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rsumarv-macbook.github.io/Zafira-boutique/sitemap.xml
