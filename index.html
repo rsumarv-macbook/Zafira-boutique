@@ -416,7 +416,7 @@ function renderGrid(){
       <div class="card-body">
         <div class="card-brand">${p.brand}</div>
         <div class="card-name">${p.name}</div>
-        <div class="card-price">${fmt(p.price)} <span>${fmt(p.oldPrice)}</span></div>
+        <div class="card-price">${fmt(p.price)}${p.oldPrice > p.price ? ` <span>${fmt(p.oldPrice)}</span>` : ''}</div>
         ${out
           ? '<button class="add-btn out" disabled>Sin stock</button>'
           : `<button class="add-btn" onclick="addToCart(${p.id}, this)">+ Agregar al carrito</button>`}
@@ -507,20 +507,26 @@ function submitOrder(){
   const subtotal = cart.reduce((a,b)=>a+b.price*b.qty,0);
   const total = subtotal + shippingCost;
   const items = cart.map(i=>`• ${i.qty}x ${i.name} (${fmt(i.price)})`).join('\n');
+  // ID del pedido: lo usa StockPro para registrarlo una sola vez
+  const orderId = 'W' + new Date().toISOString().replace(/\D/g,'').slice(2,14) +
+                  Math.random().toString(36).slice(2,5).toUpperCase();
+  const itemsJson = JSON.stringify(cart.map(i=>({sku:i.sku, qty:i.qty, price:i.price, name:i.name})));
 
   // ── Google Sheets ──────────────────────────────────────────────────────────
   const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzvAv4e20tI5wXJVYKA6z7tIhN_Rm_33aH2b1zZQo_Hw0EW_BNzO8-c-Ls1qjxn9S-t/exec';
   const sheetParams = new URLSearchParams({
-    nombre, telefono: tel, email,
-    direccion: dir, productos: items,
-    total: fmt(subtotal), pago, notas
+    id: orderId, nombre, telefono: tel, email,
+    direccion: dir, comuna: shippingName, productos: items, items: itemsJson,
+    subtotal: String(subtotal), despacho: String(shippingCost),
+    total: fmt(total), pago, notas
   });
   // Usar imagen para evitar CORS (truco clásico para Google Apps Script)
   new Image().src = `${SHEET_URL}?${sheetParams.toString()}`;
 
   // ── WhatsApp ───────────────────────────────────────────────────────────────
   const waMsg = encodeURIComponent(
-    `🛒 *Nuevo pedido — Zafira Boutique*\n\n` +
+    `🛒 *Nuevo pedido — Zafira Boutique*\n` +
+    `🧾 *Pedido:* ${orderId}\n\n` +
     `👤 *Cliente:* ${nombre}\n` +
     `📱 *Teléfono:* ${tel}\n` +
     `📧 *Email:* ${email}\n` +
@@ -537,6 +543,7 @@ function submitOrder(){
 
   // ── Email via Formspree ────────────────────────────────────────────────────
   const formData = new FormData();
+  formData.append('pedido', orderId);
   formData.append('nombre', nombre);
   formData.append('telefono', tel);
   formData.append('email', email);
@@ -549,7 +556,7 @@ function submitOrder(){
   formData.append('total', fmt(total));
   formData.append('notas', notas);
   formData.append('_replyto', email);
-  formData.append('_subject', `Nuevo pedido Zafira Boutique - ${nombre} - ${fmt(total)}`);
+  formData.append('_subject', `Nuevo pedido Zafira Boutique ${orderId} - ${nombre} - ${fmt(total)}`);
 
   fetch('https://formspree.io/f/zafiraboutique', {
     method: 'POST',
@@ -584,8 +591,39 @@ function toggleCart(){
   overlay.classList.toggle('open');
 }
 
+// ─── CATÁLOGO EN VIVO (StockPro) ───────────────────────────────────────────────
+// StockPro publica catalog.json con el precio de venta y si hay stock de cada
+// producto. Si no carga, la página sigue con los datos de arriba.
+const CAT_EMOJI = {vibradores:'💜', lubricantes:'💧', preservativos:'🟦', geles:'💚'};
+function titleCase(s){ return String(s).toLowerCase().replace(/(^|\s)\S/g, m => m.toUpperCase()); }
+function applyCatalog(cat){
+  if(!cat || !Array.isArray(cat.products)) return;
+  const bySku = {};
+  cat.products.forEach(c => { bySku[String(c.sku)] = c; });
+  for(let i = products.length - 1; i >= 0; i--){
+    const p = products[i], c = bySku[p.sku];
+    if(!c) continue;
+    delete bySku[p.sku];
+    if(c.active === false){ products.splice(i, 1); continue; }
+    if(c.price > 0) p.price = c.price;
+    if(c.available === false) p.stock = false; else delete p.stock;
+  }
+  // Productos nuevos creados en StockPro
+  let nextId = products.reduce((m,p)=>Math.max(m,p.id),0) + 1;
+  Object.values(bySku).forEach(c => {
+    if(c.active === false || !(c.price > 0) || !CAT_EMOJI[c.cat]) return;
+    const p = {id: nextId++, sku: String(c.sku), name: titleCase(c.name), brand: '', cat: c.cat,
+               price: c.price, oldPrice: 0, img: `img/${c.sku}.jpg`, emoji: CAT_EMOJI[c.cat]};
+    if(c.available === false) p.stock = false;
+    products.push(p);
+  });
+  renderGrid();
+}
+
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 renderGrid();
+fetch('catalog.json?v=' + Date.now(), {cache: 'no-store'})
+  .then(r => r.ok ? r.json() : null).then(applyCatalog).catch(() => {});
 </script>
 
 <!-- BOTÓN FLOTANTE RAPPI -->
