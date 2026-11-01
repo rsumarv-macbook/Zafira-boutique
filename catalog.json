@@ -1,0 +1,198 @@
+{
+ "products": [
+  {
+   "active": true,
+   "available": true,
+   "cat": "vibradores",
+   "name": "BENTLEY ANILLO VIBRADOR DOUBLE PLEASURE",
+   "price": 6190,
+   "sku": "7804918450963"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "vibradores",
+   "name": "BENTLEY ANILLO VIBRADOR X 1",
+   "price": 7790,
+   "sku": "7804918400814"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "lubricantes",
+   "name": "BENTLEY BLUEBERRY X 50G",
+   "price": 6390,
+   "sku": "7804918452936"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "lubricantes",
+   "name": "BENTLEY CHOCOLATE MENTA X 50G",
+   "price": 6390,
+   "sku": "7804918450901"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "lubricantes",
+   "name": "BENTLEY CLASSIC GEL LUBRICANTE X 50G",
+   "price": 5190,
+   "sku": "7804918403419"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "lubricantes",
+   "name": "BENTLEY DULCE DE LECHE X 50G",
+   "price": 6390,
+   "sku": "7804918452592"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "lubricantes",
+   "name": "BENTLEY FRUTILLA X 50G",
+   "price": 6390,
+   "sku": "7804918500385"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "geles",
+   "name": "BENTLEY GEL CONTROL X 50G",
+   "price": 7490,
+   "sku": "7804918452073"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "vibradores",
+   "name": "BENTLEY VALA VIBRADORA 10 FRECUENCIAS",
+   "price": 9890,
+   "sku": "7804918453506"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "vibradores",
+   "name": "DUREX DIABLILLO VIBRADOR",
+   "price": 8490,
+   "sku": "5038483998496"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "lubricantes",
+   "name": "DUREX LUBRICANTE CHERRY GEL",
+   "price": 8090,
+   "sku": "7501159033749"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "lubricantes",
+   "name": "DUREX LUBRICANTE COSQUILLAS DE PLACER",
+   "price": 8090,
+   "sku": "7501159033725"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "preservativos",
+   "name": "PRESERV DUREX CLASICO X 3U",
+   "price": 2890,
+   "sku": "7501159731133"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "preservativos",
+   "name": "PRESERV DUREX CLASICO X12U",
+   "price": 10290,
+   "sku": "7805010004078"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "preservativos",
+   "name": "PRESERV DUREX PLACER PROLONGADO X 3U",
+   "price": 3890,
+   "sku": "7501159033312"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "preservativos",
+   "name": "PRESERV DUREX SENSITIV DELGADO X 3U",
+   "price": 3290,
+   "sku": "7501159731232"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "preservativos",
+   "name": "PRESERV LIFE STYLE CLIMAX CONTROL X 3U",
+   "price": 3590,
+   "sku": "7804918450246"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "preservativos",
+   "name": "PRESERV LIFE STYLE SKYN X 3U",
+   "price": 6290,
+   "sku": "7804918451663"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "preservativos",
+   "name": "PRESERV LIFE STYLE VIBRA RIBED 3U",
+   "price": 2690,
+   "sku": "7804918450024"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "preservativos",
+   "name": "PRESERV STUDDED X 3U",
+   "price": 2390,
+   "sku": "7804918450031"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "geles",
+   "name": "YES GEL HOT 40G",
+   "price": 8090,
+   "sku": "7800004004560"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "lubricantes",
+   "name": "YES GEL LUBRICANTE X 30G",
+   "price": 6490,
+   "sku": "7800004003747"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "geles",
+   "name": "YES GEL OHH MEN X 90G",
+   "price": 10290,
+   "sku": "7800004006236"
+  },
+  {
+   "active": true,
+   "available": true,
+   "cat": "geles",
+   "name": "YES OH MY NIPPLE 10G",
+   "price": 8890,
+   "sku": "7800004005048"
+  }
+ ],
+ "source": "StockPro",
+ "updated": "2026-11-01T02:51:57+00:00"
+}
